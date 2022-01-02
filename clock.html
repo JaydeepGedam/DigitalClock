@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="clock.css">
+    <title>Clock</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Clock Using JavaScript</h1>
+        <div class="sub-cont hh">
+            <span id="hour"></span>
+        </div>
+        <div class="sub-cont mm">
+            <span id="min"></span>
+        </div>
+        <div class="sub-cont ss">
+            <span id="sec"></span>
+        </div>
+        <div class="sub-cont ses">
+            <span id="ses"></span>
+        </div><br>
+        <div class="sub-cont date">
+            <span id="date"></span>
+        </div>
+    </div>
+
+    <script>
+        let hour = document.getElementById('hour');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('sec');
+        let session = document.getElementById('ses');
+        let dt = document.getElementById('date');
+
+        function monthName(mn) {
+            mlist = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+            return mlist[mn.getMonth()];
+        }
+        function dayName(dn) {
+            dlist = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , "Saturday"];
+            return dlist[dn.getDay()];
+        }
+
+        setInterval(() => {
+            let date = new Date();
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+            let ses = "AM";
+            let flag = 0;
+            let today = date.getDate() + " " + monthName(date) + " " + 
+            date.getFullYear() + " ( " + dayName(date) + " )";
+
+            if(hh == 0){
+                hh = 12;
+                flag = 1;
+            }
+
+            if(hh >= 12 && flag==0){
+                ses = "PM";
+            }
+            if(hh > 12 && flag==0){
+                hh -= 12;
+            }
+
+            hh = (hh<10) ? "0" + hh : hh;
+            mm = (mm<10) ? "0" + mm : mm;
+            ss = (ss<10) ? "0" + ss : ss;
+
+            hour.innerText = hh;
+            min.innerText = mm;
+            sec.innerText = ss;
+            session.innerText = ses;
+            dt.innerText = today;
+        }, 1000);
+    </script>
+</body>
+</html>
